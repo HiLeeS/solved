@@ -1,14 +1,13 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int count = 0;
-    static List<List<Integer>> graph = new ArrayList<>();;
     static int n;
     static int m;
+    static List<List<Integer>> graph = new ArrayList<>();
+    static int answer = 0;
     static boolean[] visited;
-    
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
         m = Integer.parseInt(br.readLine());
@@ -16,40 +15,40 @@ public class Main {
         for(int i = 0; i <= n; i++){
             graph.add(new ArrayList<>());
         }
-        visited = new boolean[n+1];
-        
-        for(int i = 0; i < m; i++){        
+
+        for(int i = 0; i < m; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int n1 = Integer.parseInt(st.nextToken());
-            int n2 = Integer.parseInt(st.nextToken());
-            
-            graph.get(n1).add(n2);
-            graph.get(n2).add(n1);   
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            graph.get(s).add(e);
+            graph.get(e).add(s);
         }
-        
+
+        visited = new boolean[n+1];
+     
         bfs(1);
-        
-        System.out.print(count);
+        System.out.print(answer);
+
+
     }
-    
+
     static void bfs(int start){
+        visited[start] = true;
         Queue<Integer> q = new LinkedList<>();
         q.offer(start);
-        visited[start] = true;
-        
+
         while(!q.isEmpty()){
             int now = q.poll();
-            
+
             for(int next : graph.get(now)){
                 if(!visited[next]){
                     visited[next] = true;
                     q.offer(next);
-                    count++;
+                    answer++;
                 }
             }
-            
+
         }
-        
     }
-    
+
 }
