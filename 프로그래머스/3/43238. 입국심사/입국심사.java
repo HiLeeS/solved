@@ -4,36 +4,24 @@ class Solution {
     public long solution(int n, int[] times) {
         long answer = 0;
         
-        long min = times[0];
-        for (int i = 1; i < times.length; i++) {
-            if (times[i] < min) {
-                min = times[i];
-            }
-        }
+        Arrays.sort(times); //시간 정렬
         
-        long left = 1;
-        long right = min * n;
-        long mid = (left+right) / 2;
+        int min = times[0];
         
-        while(left != right){
-            long num = 0;
-            for(int time = 0; time < times.length; time++){
-                num += mid / times[time];
-            }
+        for(long i = min; i < min*n; i++){   //최대 시간은 심사시간이 제일 작은걸로다 돌리기 
             
-            if(num < n){
-                left = mid + 1;
-                mid = (left+right) / 2;
+            int num = 0;
+            for(int time = 0; time < times.length; time++){
+                num += i / times[time];
             }
-
-            else if(num >= n){
-                answer = mid;
-                right = mid;
-                mid = (left+right) / 2;
+            if(num >= n){
+                answer = i;
+                break;
             }
-             
         }
-
+        
+        
+        
         return answer;
     }
 }
