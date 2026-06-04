@@ -12,38 +12,19 @@ class Solution {
         Arrays.fill(arr, 1000001);
         
         arr[x] = 0;
-        int temp = 0;
         for(int i = x; i <= y; i++){
             
             
             if(i+n <= y){
-                temp = arr[i] + 1;  //이동횟수 + 1
-                if(arr[i+n] != 0){  //이미 기록이 있는 경우
-                    arr[i+n] = Math.min(temp, arr[i+n]);    //최소 이동 횟수 저장
-                }
-                else{   //처음 방문시
-                    arr[i+n] = temp;
-                }
+                arr[i+n] = Math.min(arr[i] + 1, arr[i+n]);    //최소 이동 횟수 저장
             }
             
             if(i*2 <= y){
-                temp = arr[i] + 1;
-                if(arr[i*2] != 0){
-                    arr[i*2] = Math.min(temp, arr[i*2]);
-                }
-                else{
-                    arr[i*2] = temp;
-                }
+                arr[i*2] = Math.min(arr[i] + 1, arr[i*2]);
             }
             
             if(i*3 <= y){
-                temp = arr[i] + 1;
-                if(arr[i*3] != 0){
-                    arr[i*3] = Math.min(temp, arr[i*3]);
-                }
-                else{
-                    arr[i*3] = temp;
-                }
+                arr[i*3] = Math.min(arr[i] + 1, arr[i*3]);
             }
             
             
